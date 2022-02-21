@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="OmniVehicle3">
+
+	<xacro:include filename="$(find omni_vehicle)/urdf/omni_wheel/rim.urdf.xacro"/>
+
+	<link name="origin_link"/>
+	
+	<link name="vehicle_base_link">
+		<inertial>
+			<mass value="0.07862944645"/>
+			<inertia
+				ixx="0.00002035985530754"
+				ixy="0"
+				ixz="0"
+				iyy="0.00002035985530754"
+				iyz="0"
+				izz="0.00003945961663220"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="package://omni_vehicle/meshes/base.stl" scale="3 3 1"/>
+			</geometry>
+			<material name="base_material">
+				<color rgba="1 1 1 1"/>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<mesh filename="package://omni_vehicle/meshes/base.stl" scale="3 3 1"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<joint name="base_joint" type="fixed">
+		<parent link="origin_link" />
+		<child link="vehicle_base_link" />
+		<origin xyz="0 0 0.01905"/>
+	</joint>
+
+  	<gazebo>
+		<plugin filename="libomni_controller_plugin.so" name="wheel_control">
+		  <nameSpace>Omni_vehicle</nameSpace>
+		</plugin>
+	</gazebo>
+	
+	<xacro:rim_macro name="left" color="0.3 0 0" xyz="${-0.03464101615*3} ${0.02*3} 0" rpy="1.570796326794896 0 1.047197551196597">
+		<material>Gazebo/Red</material>
+	</xacro:rim_macro>
+
+	<xacro:rim_macro name="back" color="0 0.3 0" xyz="0 ${-0.04*3} 0" rpy="1.570796326794896 0 3.141592653589793">
+		<material>Gazebo/Blue</material>
+	</xacro:rim_macro>
+	
+	<xacro:rim_macro name="right" color="0 0 0.3" xyz="${0.03464101615*3} ${0.02*3} 0" rpy="1.570796326794896 0 -1.047197551196597">
+		<material>Gazebo/Green</material>
+	</xacro:rim_macro>
+
+
+    <gazebo>
+		<plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+	      <robotNamespace>Omni_vehicle</robotNamespace>
+		  <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    	  <legacyModeNS>true</legacyModeNS>
+	    </plugin>
+	</gazebo>
+
+
+</robot>

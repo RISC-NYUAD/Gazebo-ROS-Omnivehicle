@@ -1,0 +1,3 @@
+<launch>
+	<node name="Omni_teleoper" output="screen" pkg="omni_vehicle" type="omni_teleoper_node" args="/Omni_wheel"/>
+</launch>
