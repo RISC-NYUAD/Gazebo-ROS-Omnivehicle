@@ -28,3 +28,6 @@ target_link_libraries(omni_teleoper_node ${catkin_LIBRARIES} )
 add_library(omni_controller_plugin SHARED src/controller.cpp)
 target_link_libraries(omni_controller_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
 
+add_library(omni_sensor_plugin SHARED src/sensor.cpp)
+target_link_libraries(omni_sensor_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+
