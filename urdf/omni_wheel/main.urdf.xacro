@@ -37,6 +37,13 @@
 		<origin xyz="0 0 0.01905"/>
 	</joint>
 
+	<gazebo>
+		<plugin filename="libomni_sensor_plugin.so" name="pose_sensor">
+		  <nameSpace>Omni_vehicle</nameSpace>
+		</plugin>
+	</gazebo>
+
+	
   	<gazebo>
 		<plugin filename="libomni_controller_plugin.so" name="wheel_control">
 		  <nameSpace>Omni_vehicle</nameSpace>
