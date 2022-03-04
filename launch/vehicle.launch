@@ -1,8 +1,9 @@
 <launch>
 	<arg name="xacro_name" default="$(find omni_vehicle)/urdf/omni_wheel/main.urdf.xacro"/>	
-
 	<arg name="model_name" default="Omni_vehicle"/>
 
+	<rosparam command="load" file="$(find omni_vehicle)/config/motor_control.yaml" />
+	
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
 		<arg name="paused" value="true" />
 		<arg name="gui" value="true" />
@@ -10,6 +11,13 @@
 
 	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(arg xacro_name)' " />
 
+	
 	<node name="spawn_arm" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -x 0.0 -y 0.0 -z 0.0 -model $(arg model_name)"/>
 
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+   				  output="screen" ns="Omni_vehicle" args="joint_state_controller left_controller right_controller back_controller"/>
+
+	<node name="controller_node" pkg="omni_vehicle" type="omni_control_node" output="screen" args="0 0 0"/>
+
+	
 </launch>
