@@ -42,13 +42,6 @@
 		  <nameSpace>Omni_vehicle</nameSpace>
 		</plugin>
 	</gazebo>
-
-	
-  	<gazebo>
-		<plugin filename="libomni_controller_plugin.so" name="wheel_control">
-		  <nameSpace>Omni_vehicle</nameSpace>
-		</plugin>
-	</gazebo>
 	
 	<xacro:rim_macro name="left" color="0.3 0 0" xyz="${-0.03464101615*3} ${0.02*3} 0" rpy="1.570796326794896 0 1.047197551196597">
 		<material>Gazebo/Red</material>
